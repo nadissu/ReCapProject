@@ -3,11 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Entities.Concrete
+namespace Entities.DTOs
 {
-    public class Color:IEntity
+   public class GetColorsByColorId:IDto
     {
         public int ColorId { get; set; }
         public string ColorName { get; set; }
+
+        public string Description { get; set; }    
     }
 }
