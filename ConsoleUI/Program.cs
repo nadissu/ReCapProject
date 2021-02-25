@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using Business.Constants;
 using DataAccsess.Concrete.EntityFramework;
 using DataAccsess.Concrete.InMemory;
 using Entities.Concrete;
@@ -11,12 +12,21 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            GetAllTest();
+            //GetAllTest();
+            //UpdateTest(carManager);
+            //GetColosByColorIdTest();
+            //GetColosByColorIdTest();
+            //AddTest();
+            //DeleteTest(carManager, car1);
+
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            Customer customer = new Customer() { CustomerId = 4, CompanyName = "NDD SLTN", UserId = 15 };
+            var result = customerManager.Add(customer);
+            Console.WriteLine(result.Message);
+
+
         }
-        private static void GetAll()
-        {
-            GetAllTest();
-        }
+
 
         private static void GetAllTest()
         {
@@ -36,64 +46,44 @@ namespace ConsoleUI
                     Console.WriteLine(result.Message);
                 }
             }
-            
-            
+        private static void GetColosByColorIdTest()
+        {
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+            foreach (var color in colorManager.GetColorsByColorId(1))
+            {
+                Console.WriteLine(color.ColorId + "/" + color.ColorName);
+
+            }
+            Console.WriteLine("Hello World!");
         }
 
-        //private static void GetColorsByColorId(int id)
-        //{
-        //    //GetColosByColorIdTest();
-        //}
+        private static void GetBrandsByBrandIdTest()
+        {
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+            foreach (var brand in brandManager.GetBrandsByBrandId(1))
+            {
+                Console.WriteLine(brand.BrandId + "/" + brand.BrandName);
 
-        //private static void GetColosByColorIdTest()
-        //{
-        //    ColorManager colorManager = new ColorManager(new EfColorDal());
-        //    foreach (var color in colorManager.GetColorsByColorId(1))
-        //    {
-        //        Console.WriteLine(color.ColorId + "/" + color.ColorName);
+            }
+            Console.WriteLine("Hello World!");
+        }
 
-        //    }
-        //    Console.WriteLine("Hello World!");
-        //}
-        //private static void GetBrandsByBrandId()
-        //{
-        //    //GetBrandsByBrandIdTest();
-        //}
+        private static void AddTest()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
 
-        //private static void GetBrandsByBrandIdTest()
-        //{
-        //    BrandManager brandManager = new BrandManager(new EfBrandDal());
-        //    foreach (var brand in brandManager.GetBrandsByBrandId(1))
-        //    {
-        //        Console.WriteLine(brand.BrandId + "/" + brand.BrandName);
+            Car car1 = new Car()
+            {
+                CarId = 7,
+                BrandId = 3,
+                ColorId = 4,
+                Price = 300000,
+                Description = "Volkswagen Araba",
+                ModelYear = 2018
+            };
+            Console.WriteLine(car1.Description);
+        }
 
-        //    }
-        //    Console.WriteLine("Hello World!");
-        //}
-        //private static void Add()
-        //{
-        //    //AddTest();
-        //}
-
-        //private static void AddTest()
-        //{
-        //    CarManager carManager = new CarManager(new EfCarDal());
-
-        //    Car car1 = new Car()
-        //    {
-        //        CarId = 7,
-        //        BrandId = 3,
-        //        ColorId = 4,
-        //        Price = 300000,
-        //        Description = "Volkswagen Araba",
-        //        ModelYear = 2018
-        //    };
-        //    Console.WriteLine(car1.Description);
-        //}
-        //private static void Update(CarManager carManager)
-        //{
-        //    //UpdateTest(carManager);
-        //}
 
         //private static void UpdateTest(CarManager carManager)
         //{
@@ -104,22 +94,23 @@ namespace ConsoleUI
         //    {
         //        Console.WriteLine(car.Description);
         //    }
+        //    Console.WriteLine("Hello World!");
         //}
 
-        //private static void DeleteTest(CarManager carManager, Car car1)
-        //{
-        //    //DeleteTest(carManager, car1);
-        //}
 
-        //private static void Delete(CarManager carManager, Car car1)
-        //{
-        //    carManager.Delete(car1);
-        //    List<Car> c = carManager.GetAll();
-        //    foreach (var car in c)
-        //    {
-        //        Console.WriteLine(car.Description);
-        //    }
-        //}
+
+        private static void Delete(CarManager carManager, Car car1)
+        {
+            carManager.Delete(car1);
+            List<Car> c = (List<Car>)carManager.GetAll();
+            foreach (var car in c)
+            {
+                Console.WriteLine(car.Description);
+            }
+            Console.WriteLine("Hello World!");
+        }
+
+    }
     }
   
 
