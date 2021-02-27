@@ -19,6 +19,18 @@ namespace WebAPI.Controllers
         {
             _carService = carService;
         }
+        [HttpGet("getall")]
+        public IActionResult GetAll()
+        {
+            //Dependency chain
+            var result = _carService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+
+        }
         [HttpGet("getbybrandid")]
         public IActionResult GetByBrandId(int id)
         {
