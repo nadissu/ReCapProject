@@ -43,6 +43,11 @@
         public static string UserListed = "Kullanıcı Listelendi";
         public static string UsersListed = "Kullanıcılar Listelendi";
         public static string UserUpdated = "Kullanıcı Bilgileri Güncellendi";
-        internal static string RentalDeliverError;
+        public static string RentalDeliverError;
+        public static string RentalDelivered = "Araç Teslim Edildi";
+        public static string RentalBusy = "Araç Suan Kullanımda";
+        public static string NoRecording = "Kayıt Bulunamadı";
+        internal static string FailAddedImageLimit;
+        internal static string CarNameInvalid;
     }
 }

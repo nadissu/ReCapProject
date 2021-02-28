@@ -9,6 +9,7 @@ using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -27,33 +28,35 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-           
-            _carDal.Add(car);
-            return new SuccessResult(Messages.ProductAdded);
-        }
+            ValidationTool.Validate(new CarValidator(), car);
 
+            _carDal.Add(car);
+            return new ErrorResult(Messages.CarNameInvalid);
+
+        }
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Delete(Car car)
         {
-            throw new NotImplementedException();
+           
+            _carDal.Delete(car);
+            return new SuccessResult(Messages.CarDeleted);
         }
+
 
         public IDataResult<List<Car>> GetAll()
         {
-            if (DateTime.Now.Hour == 15)
-            {
-                return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
-            }
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.ProductListed);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll().ToList(), Messages.CarsListed);
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
+
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
 
         public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c =>c.BrandId  == id));
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.BrandId == id));
         }
 
         public IDataResult<List<Car>> GetCarsByColorId(int id)
@@ -61,9 +64,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId== id));
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
-            throw new NotImplementedException();
+            _carDal.Update(car);
+            return new SuccessResult(Messages.CarUpdated);
         }
     }
 }
