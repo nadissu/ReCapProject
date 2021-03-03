@@ -1,4 +1,6 @@
-﻿namespace Business.Constants
+﻿using Core.Entities.Concrete;
+
+namespace Business.Constants
 {
     public static class Messages
     {
@@ -47,7 +49,14 @@
         public static string RentalDelivered = "Araç Teslim Edildi";
         public static string RentalBusy = "Araç Suan Kullanımda";
         public static string NoRecording = "Kayıt Bulunamadı";
-        internal static string FailAddedImageLimit;
-        internal static string CarNameInvalid;
+        public static string AuthorizationDenied = "Kimlik Doğrulanamadı!";
+        public static string UserRegistered = "Kayıt Başarılı.";
+        public static string UserNotFound = "Kullanıcı Bulunamadı";
+        public static string PasswordError = "Hatalı Şifre Girdiniz";
+        public static string SuccessfulLogin = "Giriş Başarılı!";
+        public static string UserAlreadyExists = "Kullanıcı Zaten Var";
+        public static string AccessTokenCreated = "Token Oluşturuldu.";
+        public static string FailAddedImageLimit="Limit Aşıldı";
+        public static string CarNameInvalid="Geçerli isim giriniz";
     }
 }
