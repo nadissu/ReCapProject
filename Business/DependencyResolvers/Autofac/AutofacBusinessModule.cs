@@ -10,7 +10,7 @@ using DataAccsess.Concrete.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using static Business.Concrete.UserManager;
+
 
 namespace Business.DependencyResolvers.Autofac
 {
